@@ -19,7 +19,7 @@ resource "aws_route53_record" "top_domain_validation" {
       type   = dvo.resource_record_type
     }
   }
-  
+
   allow_overwrite = true
   name            = each.value.name
   records         = [each.value.record]
@@ -31,7 +31,7 @@ resource "aws_route53_record" "top_domain_validation" {
 resource "aws_acm_certificate_validation" "top_domain" {
   certificate_arn         = aws_acm_certificate.top_domain.arn
   validation_record_fqdns = [for record in aws_route53_record.top_domain_validation : record.fqdn]
-  
+
   # We need the certificate in the "us-east-1" region
   provider = aws.virginia
 }
