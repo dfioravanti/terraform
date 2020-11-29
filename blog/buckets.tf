@@ -1,8 +1,4 @@
 
-provider "aws" {
-  profile = "blog"
-  region  = "eu-central-1"
-}
 
 resource "aws_s3_bucket" "website_bucket" {
   bucket = local.domain_name

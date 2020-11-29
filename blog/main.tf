@@ -14,6 +14,12 @@ terraform {
 }
 
 provider "aws" {
+  profile = "blog"
+  region  = "eu-central-1"
+}
+
+# needed for the HTTPS certificates
+provider "aws" {
   alias  = "virginia"
   region = "us-east-1"
 }
