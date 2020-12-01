@@ -47,6 +47,13 @@ resource "aws_cloudfront_distribution" "blog" {
     min_ttl     = 0
     default_ttl = 3600
     max_ttl     = 86400
+
+    lambda_function_association {
+      event_type   = "viewer-request"
+      lambda_arn   = aws_lambda_function.pretty_url.qualified_arn
+      include_body = false
+    }
+
   }
 
   restrictions {
@@ -70,6 +77,8 @@ resource "aws_cloudfront_distribution" "blog" {
     response_page_path    = "/404.html"
     response_code         = 404
   }
+
+
 
   tags = {
     Environment = "production"

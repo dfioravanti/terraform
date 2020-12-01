@@ -19,6 +19,16 @@ resource "aws_s3_bucket" "website_logs_bucket" {
   }
 }
 
+resource "aws_s3_bucket" "lambda-functions-cloudfront" {
+  bucket   = "${local.domain_name}-lambda-functions-cloudfront"
+  provider = aws.virginia
+
+  tags = {
+    Name = "${local.domain_name}-lambda-functions-cloudfront"
+  }
+}
+
+
 
 data "aws_iam_policy_document" "website_policy" {
   statement {
