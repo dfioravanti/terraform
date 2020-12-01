@@ -64,6 +64,13 @@ resource "aws_cloudfront_distribution" "blog" {
     ssl_support_method       = "sni-only"
   }
 
+  custom_error_response {
+    error_code            = 404
+    error_caching_min_ttl = 60
+    response_page_path    = "/404.html"
+    response_code         = 404
+  }
+
   tags = {
     Environment = "production"
     Name        = "blog"
