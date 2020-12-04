@@ -7,7 +7,8 @@ resource "aws_cloudfront_origin_access_identity" "blog" {
 }
 
 # IMPORTANT: if you do something that changes the id of the distribution then you need to 
-# update this id config file of the website
+# update this id config file of the website.
+# This distribution does not log anything as I do not want to deal with the GDPR.
 resource "aws_cloudfront_distribution" "blog" {
   origin {
     domain_name = aws_s3_bucket.website_bucket.bucket_domain_name
@@ -21,11 +22,6 @@ resource "aws_cloudfront_distribution" "blog" {
   enabled             = true
   is_ipv6_enabled     = true
   default_root_object = "index.html"
-
-  logging_config {
-    include_cookies = false
-    bucket          = aws_s3_bucket.website_logs_bucket.bucket_domain_name
-  }
 
   aliases = ["www.dfioravanti.com"]
 

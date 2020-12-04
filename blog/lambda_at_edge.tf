@@ -1,3 +1,5 @@
+# This lambda function does not have any log permission as I do not want to deal with the GDPR.
+# The IP address is a sensitive data and I do not want to record it even by mistake.
 resource "aws_lambda_function" "pretty_url" {
   function_name = "pretty_url"
 
@@ -17,15 +19,4 @@ resource "aws_lambda_function" "pretty_url" {
   # We need the function in the "us-east-1" region
   provider = aws.virginia
 
-  depends_on = [
-    aws_iam_role_policy_attachment.lambda_logs,
-    aws_cloudwatch_log_group.pretty_url,
-  ]
-
-}
-
-# This is manage the CloudWatch Log Group for the Lambda Function.
-resource "aws_cloudwatch_log_group" "pretty_url" {
-  name              = "/aws/lambda/us-east-1.pretty_url"
-  retention_in_days = 14
 }

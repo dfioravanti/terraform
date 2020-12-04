@@ -11,14 +11,6 @@ resource "aws_s3_bucket" "website_bucket" {
   }
 }
 
-resource "aws_s3_bucket" "website_logs_bucket" {
-  bucket = "${local.domain_name}-logs"
-
-  tags = {
-    Name = "${local.domain_name}-logs"
-  }
-}
-
 resource "aws_s3_bucket" "lambda-functions-cloudfront" {
   bucket   = "${local.domain_name}-lambda-functions-cloudfront"
   provider = aws.virginia
